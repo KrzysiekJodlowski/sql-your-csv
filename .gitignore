@@ -15,5 +15,14 @@ target/
 *.iml
 *.ipr
 
-###Other###
+### Other ###
 src/main/resources/application.properties
+out/
+
+### Gradle ###
+.gradle/
+build.gradle
+gradle/
+gradlew
+gradlew.bat
+settings.gradle
