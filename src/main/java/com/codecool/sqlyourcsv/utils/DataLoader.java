@@ -1,9 +1,12 @@
 package com.codecool.sqlyourcsv.utils;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public interface DataLoader {
 
-    Map<String, ArrayList<ArrayList<String>>> loadDataFromResources();
+    void loadDataFromResources();
+    List<String> getResourceNames();
+    Map<String, ArrayList<ArrayList<String>>> getData();
 }

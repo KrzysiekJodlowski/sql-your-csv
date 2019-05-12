@@ -26,7 +26,7 @@ public class CSVLoader implements DataLoader {
     public CSVLoader() {
         this.resourceFilepaths = this.getAllFilePathsFromResources();
         this.checkIfResourceFilePathsEmpty();
-        this.data = this.loadDataFromResources();
+        this.loadDataFromResources();
     }
 
     private List<String> getAllFilePathsFromResources() {
@@ -55,16 +55,16 @@ public class CSVLoader implements DataLoader {
     }
 
     @Override
-    public Map<String, ArrayList<ArrayList<String>>> loadDataFromResources() {
+    public void loadDataFromResources() {
         Map<String, ArrayList<ArrayList<String>>> data = new HashMap<>();
-
-        return null;
     }
 
-    public List<String> getResourceFilepaths() {
+    @Override
+    public List<String> getResourceNames() {
         return this.resourceFilepaths;
     }
 
+    @Override
     public Map<String, ArrayList<ArrayList<String>>> getData() {
         return this.data;
     }
