@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>SQL YOUR CSV</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <h1>SQL YOUR CSV</h1>
+        <form action="#" th:action="@{/sql-your-csv}" method="post">
+            <p>Type in query for csv file: <input type="text" name="query" /></p>
+            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        </form>
+    </body>
+</html>
