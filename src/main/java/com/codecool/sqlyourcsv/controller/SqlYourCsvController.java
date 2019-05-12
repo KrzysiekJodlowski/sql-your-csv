@@ -1,4 +1,4 @@
-package com.codecool.sqlyourcsv.controllers;
+package com.codecool.sqlyourcsv.controller;
 
 import com.codecool.sqlyourcsv.model.UserQuery;
 import org.springframework.stereotype.Controller;
@@ -12,7 +12,7 @@ public class SqlYourCsvController {
 
     @GetMapping("/sql-your-csv")
     public String hello(Model model) {
-        model.addAttribute("query", new UserQuery());
+        model.addAttribute("userQuery", new UserQuery());
         return "sql_your_csv";
     }
 
