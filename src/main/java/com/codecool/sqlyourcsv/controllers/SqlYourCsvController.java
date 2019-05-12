@@ -12,7 +12,7 @@ public class SqlYourCsvController {
 
     @GetMapping("/sql-your-csv")
     public String hello(Model model) {
-        model.addAttribute("query", new UserQuery());
+        model.addAttribute("userQuery", new UserQuery());
         return "sql_your_csv";
     }
 
