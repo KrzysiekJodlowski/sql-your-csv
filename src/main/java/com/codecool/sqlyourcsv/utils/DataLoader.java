@@ -8,5 +8,5 @@ public interface DataLoader {
 
     void loadDataFromResources();
     List<String> getResourceNames();
-    Map<String, ArrayList<ArrayList<String>>> getData();
+    Map<String, List<List<String>>> getData();
 }
