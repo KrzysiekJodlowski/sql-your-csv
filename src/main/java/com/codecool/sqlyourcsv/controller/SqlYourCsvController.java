@@ -1,4 +1,4 @@
-package com.codecool.sqlyourcsv.controllers;
+package com.codecool.sqlyourcsv.controller;
 
 import com.codecool.sqlyourcsv.model.UserQuery;
 import org.springframework.stereotype.Controller;
