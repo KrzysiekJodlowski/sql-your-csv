@@ -37,15 +37,18 @@ public class CSVLoader implements DataLoader {
                     .map(Path::toString)
                     .collect(Collectors.toCollection(() -> filePaths));
         } catch (SecurityException se) {
-            filePaths.add(this.accessErrorMessage);
-            System.out.println(this.accessErrorMessage);
+            this.addAndPrintMessage(filePaths, this.accessErrorMessage);
             se.printStackTrace();
         } catch (IOException e) {
-            filePaths.add(this.IOErrorMessage);
-            System.out.println(this.IOErrorMessage);
+            this.addAndPrintMessage(filePaths, this.IOErrorMessage);
             e.printStackTrace();
         }
         return filePaths;
+    }
+
+    private void addAndPrintMessage(List<String> filePaths, String message) {
+        filePaths.add(message);
+        System.out.println(message);
     }
 
     private void checkIfResourceFilePathsEmpty() {
