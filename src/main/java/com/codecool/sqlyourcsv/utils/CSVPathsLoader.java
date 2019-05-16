@@ -18,10 +18,10 @@ public class CSVPathsLoader {
     private final String ACCESS_ERROR_MESSAGE = "Access denied!";
     private final String IO_ERROR_MESSAGE = "I/O operation failed!";
     private final String EMPTY_RESOURCES_MESSAGE = "No CSV files!";
-    private List<String> resourceFilepaths;
+    private List<String> resourceFilePaths;
 
     public CSVPathsLoader() {
-        this.resourceFilepaths = new ArrayList<>();
+        this.resourceFilePaths = new ArrayList<>();
         this.loadFilePathsFromResources();
         this.checkIfResourceFilePathsEmpty();
     }
@@ -30,12 +30,12 @@ public class CSVPathsLoader {
         try (Stream<Path> paths = Files.walk(Paths.get(this.RESOURCES_FOLDER))) {
             paths.filter(Files::isRegularFile)
                     .map(Path::toString)
-                    .collect(Collectors.toCollection(() -> this.resourceFilepaths));
+                    .collect(Collectors.toCollection(() -> this.resourceFilePaths));
         } catch (SecurityException se) {
-            this.addAndPrintMessage(this.resourceFilepaths, this.ACCESS_ERROR_MESSAGE);
+            this.addAndPrintMessage(this.resourceFilePaths, this.ACCESS_ERROR_MESSAGE);
             se.printStackTrace();
         } catch (IOException e) {
-            this.addAndPrintMessage(this.resourceFilepaths, this.IO_ERROR_MESSAGE);
+            this.addAndPrintMessage(this.resourceFilePaths, this.IO_ERROR_MESSAGE);
             e.printStackTrace();
         }
     }
@@ -46,12 +46,12 @@ public class CSVPathsLoader {
     }
 
     private void checkIfResourceFilePathsEmpty() {
-        if (this.resourceFilepaths.isEmpty()) {
-            this.resourceFilepaths.add(this.EMPTY_RESOURCES_MESSAGE);
+        if (this.resourceFilePaths.isEmpty()) {
+            this.resourceFilePaths.add(this.EMPTY_RESOURCES_MESSAGE);
         }
     }
 
     List<String> getResourceNames() {
-        return this.resourceFilepaths;
+        return this.resourceFilePaths;
     }
 }
