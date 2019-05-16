@@ -1,5 +1,6 @@
 package com.codecool.sqlyourcsv.utils;
 
+import com.codecool.sqlyourcsv.model.FileData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +16,7 @@ public class CSVLoader implements DataLoader {
 
     private final String FILE_NOT_FOUND_MESSAGE = "File %s not found!";
     private final CSVPathsLoader csvPathsLoader;
-    private Map<String, List<List<String>>> data;
+    private Map<String, FileData> data;
 
     @Autowired
     public CSVLoader(CSVPathsLoader csvPathsLoader) {
@@ -54,7 +55,7 @@ public class CSVLoader implements DataLoader {
     }
 
     @Override
-    public Map<String, List<List<String>>> getData() {
+    public Map<String, FileData> getData() {
         return this.data;
     }
 }
