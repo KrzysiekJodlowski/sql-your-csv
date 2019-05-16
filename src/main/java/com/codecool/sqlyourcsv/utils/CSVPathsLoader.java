@@ -14,32 +14,30 @@ import java.util.stream.Stream;
 @Component
 public class CSVPathsLoader {
 
-    private final String RESOURCES_FOLDER = "/main/resources/csv";
+    private final String RESOURCES_FOLDER = "/home/krzysiek/Advanced/4rd_week/fp/sql-your-csv/src/main/resources/csv";
     private final String ACCESS_ERROR_MESSAGE = "Access denied!";
     private final String IO_ERROR_MESSAGE = "I/O operation failed!";
     private final String EMPTY_RESOURCES_MESSAGE = "No CSV files!";
-    private List<String> resourceFilepaths;
+    private List<String> resourceFilePaths;
 
     public CSVPathsLoader() {
-        this.resourceFilepaths = this.getAllFilePathsFromResources();
+        this.resourceFilePaths = new ArrayList<>();
+        this.loadFilePathsFromResources();
         this.checkIfResourceFilePathsEmpty();
     }
 
-    private List<String> getAllFilePathsFromResources() {
-        List<String> filePaths = new ArrayList<>();
-
+    private void loadFilePathsFromResources() {
         try (Stream<Path> paths = Files.walk(Paths.get(this.RESOURCES_FOLDER))) {
-            return paths.filter(Files::isRegularFile)
+            paths.filter(Files::isRegularFile)
                     .map(Path::toString)
-                    .collect(Collectors.toCollection(() -> filePaths));
+                    .collect(Collectors.toCollection(() -> this.resourceFilePaths));
         } catch (SecurityException se) {
-            this.addAndPrintMessage(filePaths, this.ACCESS_ERROR_MESSAGE);
+            this.addAndPrintMessage(this.resourceFilePaths, this.ACCESS_ERROR_MESSAGE);
             se.printStackTrace();
         } catch (IOException e) {
-            this.addAndPrintMessage(filePaths, this.IO_ERROR_MESSAGE);
+            this.addAndPrintMessage(this.resourceFilePaths, this.IO_ERROR_MESSAGE);
             e.printStackTrace();
         }
-        return filePaths;
     }
 
     private void addAndPrintMessage(List<String> filePaths, String message) {
@@ -48,12 +46,12 @@ public class CSVPathsLoader {
     }
 
     private void checkIfResourceFilePathsEmpty() {
-        if (this.resourceFilepaths.isEmpty()) {
-            this.resourceFilepaths.add(this.EMPTY_RESOURCES_MESSAGE);
+        if (this.resourceFilePaths.isEmpty()) {
+            this.resourceFilePaths.add(this.EMPTY_RESOURCES_MESSAGE);
         }
     }
 
-    List<String> getResourceNames() {
-        return this.resourceFilepaths;
+    public Stream<String> getResourceFilePaths() {
+        return this.resourceFilePaths.stream();
     }
 }
