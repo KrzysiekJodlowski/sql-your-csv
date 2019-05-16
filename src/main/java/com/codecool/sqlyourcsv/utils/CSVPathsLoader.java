@@ -51,7 +51,7 @@ public class CSVPathsLoader {
         }
     }
 
-    List<String> getResourceFilePaths() {
-        return this.resourceFilePaths;
+    public Stream<String> getResourceFilePaths() {
+        return this.resourceFilePaths.stream();
     }
 }
