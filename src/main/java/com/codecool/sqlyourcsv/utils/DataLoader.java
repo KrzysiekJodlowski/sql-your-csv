@@ -2,12 +2,12 @@ package com.codecool.sqlyourcsv.utils;
 
 import com.codecool.sqlyourcsv.model.FileData;
 
-import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public interface DataLoader {
 
     void loadDataFromResources();
-    List<String> getResourceNames();
+    Stream<String> getResourceNames();
     Map<String, FileData> getData();
 }

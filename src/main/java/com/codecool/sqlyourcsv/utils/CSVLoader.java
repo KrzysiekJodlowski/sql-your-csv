@@ -50,8 +50,8 @@ public class CSVLoader implements DataLoader {
     }
 
     @Override
-    public List<String> getResourceNames() {
-        return this.csvPathsLoader.getResourceNames();
+    public Stream<String> getResourceNames() {
+        return this.csvPathsLoader.getResourceFilePaths().stream();
     }
 
     @Override
