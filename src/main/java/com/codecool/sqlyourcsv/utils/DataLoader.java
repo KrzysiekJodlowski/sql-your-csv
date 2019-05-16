@@ -8,6 +8,5 @@ import java.util.stream.Stream;
 public interface DataLoader {
 
     void loadDataFromResources();
-    Stream<String> getResourceNames();
     Map<String, FileData> getData();
 }

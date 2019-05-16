@@ -28,11 +28,33 @@ public class CSVLoader implements DataLoader {
     public void loadDataFromResources() {
         this.data = new HashMap<>();
 
-        this.getResourceNames().
-                forEach(path -> this.data.put(path,
-                        Objects.requireNonNull(getFileStream(path)).
-                        map(this::splitStream).
-                        collect(Collectors.toList())));
+        this.getResourceFilePaths().
+                forEach(path -> this.data.put(
+                        this.getFileName(path),
+                        this.getFileData(path)));
+    }
+
+    private Stream<String> getResourceFilePaths() {
+        return this.csvPathsLoader.getResourceFilePaths();
+    }
+
+    private String getFileName(String filePath) {
+        String[] splittedPath = filePath.split("/");
+        int lastNameIndex = splittedPath.length - 1;
+        return splittedPath[lastNameIndex];
+    }
+
+    private FileData getFileData(String path) {
+        FileData fileData = new FileData(this.getFileName(path));
+        Iterator<String> lines = Objects.requireNonNull(getFileStream(path)).
+                collect(Collectors.toList()).
+                iterator();
+
+        if(lines.hasNext()) {
+            this.splitStream(lines.next()).forEach(fileData::addHeader);
+        }
+        lines.forEachRemaining(line -> fileData.addDataRow(this.splitStream(line)));
+        return fileData;
     }
 
     private Stream<String> getFileStream(String path) {
@@ -47,11 +69,6 @@ public class CSVLoader implements DataLoader {
 
     private List<String> splitStream(String streamLine) {
         return Arrays.asList(streamLine.split(","));
-    }
-
-    @Override
-    public Stream<String> getResourceNames() {
-        return this.csvPathsLoader.getResourceFilePaths();
     }
 
     @Override
