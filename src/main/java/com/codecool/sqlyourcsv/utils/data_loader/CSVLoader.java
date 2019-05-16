@@ -47,7 +47,6 @@ public class CSVLoader implements DataLoader {
     private FileData getFileData(String path) {
         FileData fileData = new FileData(this.getFileName(path));
         Iterator<String> lines = Objects.requireNonNull(getFileStream(path)).
-                collect(Collectors.toList()).
                 iterator();
 
         if(lines.hasNext()) {
@@ -57,9 +56,9 @@ public class CSVLoader implements DataLoader {
         return fileData;
     }
 
-    private Stream<String> getFileStream(String path) {
+    private List<String> getFileStream(String path) {
         try (Stream<String> stream = Files.lines(Paths.get(path))) {
-            return stream;
+            return stream.collect(Collectors.toList());
         } catch (IOException e) {
             System.out.println(String.format(this.FILE_NOT_FOUND_MESSAGE, path));
             e.printStackTrace();

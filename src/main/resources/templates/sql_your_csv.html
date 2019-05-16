@@ -10,5 +10,18 @@
             <p>Type in query for csv file: <input type="text" th:field="*{content}"/></p>
             <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
         </form>
+        <table>
+            <thead>
+            <tr>
+                <th> Title </th>
+                <th> Author </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="header : ${users.getDataHeaders()}">
+                <td><span th:text="${header}"></span></td>
+            </tr>
+            </tbody>
+        </table>
     </body>
 </html>
