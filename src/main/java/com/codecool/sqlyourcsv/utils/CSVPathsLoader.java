@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 @Component
 public class CSVPathsLoader {
 
-    private final String RESOURCES_FOLDER = "/main/resources/csv";
+    private final String RESOURCES_FOLDER = "/home/krzysiek/Advanced/4rd_week/fp/sql-your-csv/src/main/resources/csv";
     private final String ACCESS_ERROR_MESSAGE = "Access denied!";
     private final String IO_ERROR_MESSAGE = "I/O operation failed!";
     private final String EMPTY_RESOURCES_MESSAGE = "No CSV files!";
