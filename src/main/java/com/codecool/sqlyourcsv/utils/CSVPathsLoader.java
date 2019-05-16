@@ -21,25 +21,23 @@ public class CSVPathsLoader {
     private List<String> resourceFilepaths;
 
     public CSVPathsLoader() {
-        this.resourceFilepaths = this.getAllFilePathsFromResources();
+        this.resourceFilepaths = new ArrayList<>();
+        this.loadFilePathsFromResources();
         this.checkIfResourceFilePathsEmpty();
     }
 
-    private List<String> getAllFilePathsFromResources() {
-        List<String> filePaths = new ArrayList<>();
-
+    private void loadFilePathsFromResources() {
         try (Stream<Path> paths = Files.walk(Paths.get(this.RESOURCES_FOLDER))) {
-            return paths.filter(Files::isRegularFile)
+            paths.filter(Files::isRegularFile)
                     .map(Path::toString)
-                    .collect(Collectors.toCollection(() -> filePaths));
+                    .collect(Collectors.toCollection(() -> this.resourceFilepaths));
         } catch (SecurityException se) {
-            this.addAndPrintMessage(filePaths, this.ACCESS_ERROR_MESSAGE);
+            this.addAndPrintMessage(this.resourceFilepaths, this.ACCESS_ERROR_MESSAGE);
             se.printStackTrace();
         } catch (IOException e) {
-            this.addAndPrintMessage(filePaths, this.IO_ERROR_MESSAGE);
+            this.addAndPrintMessage(this.resourceFilepaths, this.IO_ERROR_MESSAGE);
             e.printStackTrace();
         }
-        return filePaths;
     }
 
     private void addAndPrintMessage(List<String> filePaths, String message) {
